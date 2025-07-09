@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Transaction
+        </title>
+        <style>
+            body{
+                display: grid;
+                place-items: center;
+                margin: 0;
+                height: 100vh;
+                background: #4c1796;
+            }
+
+            *{
+                box-sizing: border-box;
+            }
+
+            .transaction h1{
+                font-size: 64px;
+                font-weight: 500;
+                
+            }
+
+            .transaction h2{
+                font-size: 32px;
+                font-weight: 500;
+                margin: 0 0 56px;
+            }
+
+            .transaction form{
+                display: grid;
+                gap: 12px;
+                width: 100%;
+                margin: 0 0 32px;
+            }
+
+            .transaction .textbox{
+                position: relative;
+            }
+
+            .transaction :is(input, button){
+                height: 56px;
+                font-family: inherit;
+                font-size: 16px;
+                padding: 16px;
+                border: 0;
+                border-radius: 8px;
+            }
+
+            .transaction, input{
+                transition: 0.3s;
+            }
+
+            .textbox label{
+                position: absolute;
+                top: 50%;
+                left: 16px;
+                translate: 0 -50%;
+                pointer-events: none;
+
+            }
+            .textbox p{
+                width: 100%;
+                padding-top: 10px;
+                background: #251930;
+                color: inherit;
+                box-shadow: 0 0 0 2px transparent;
+                height: 50px;
+                outline: none;
+                
+            }
+            .textbox input{
+                width: 100%;
+                padding-top: 10px;
+                background: #251930;
+                outline: none;
+                color: inherit;
+                box-shadow: 0 0 0 2px transparent;
+            }
+
+            .textbox input:focus{
+                box-shadow: 0 0 0 2px blueviolet;
+            }
+
+            .textbox input:is(:focus, :not(:invalid)) ~ label{
+                scale: 0.725;
+                translate: 0 -112%;
+            }
+
+            .transaction button{
+                position: relative;
+                color: #f9f9f9;
+                font-size: 17px;
+                background: #990b86;
+            }
+
+            .transaction:is(button span, button p){
+                transition: 0.3s;
+            }
+
+            .transaction button:hover p{
+                translate: -10px 0;
+            }
+
+            .transaction button:hover span{
+                opacity: 1;
+                translate: 20px -50%;
+            }
+
+            .transaction a{
+                font-size: 15px;
+                color: #1e142c;
+                position: fixed;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="transaction">
+            <h1>
+                APNA BANK
+            </h1>
+            <h2>
+                Hi
+                <strong>
+                  {{ session['user']['username']}}  
+                </strong>
+            </h2>
+            <form method="post" class="form">
+                <div class="textbox">
+                    <p>
+                        {{ session['user']['account_no']}}
+                    </p>
+                    <label>
+                        From Account_no
+                    </label>
+                </div>
+                <div class="textbox">
+                    <input required name="to_account" type="text">
+                    <label>
+                        To Account_no
+                    </label>
+                </div>
+                <div class="textbox">
+                    <input type="number" step="0.01" name="amount" required>
+                    <label>
+                        Amount
+                    </label>
+                </div>
+                <button type="submit">
+                <p>
+                    <strong>SEND</strong>
+                </p>
+            </button>
+            </form>
+            
+            <a href="{{ url_for('dashboard')}}">
+                Back to dashboard
+            </a>
+        </div>
+    </body>
+</html>

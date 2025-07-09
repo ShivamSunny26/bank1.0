@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Login
+    </title>
+    <style>
+        *{
+            font-size: x-large;
+        }
+        body {
+            width: 100dvw;
+            height: 200dvh;
+            overflow: hidden;
+            display: flex;
+            height: 100%;
+            width: 100%;
+            justify-content:center;
+            background-image: linear-gradient(to right, #F9F586, #96FBC4);
+            
+        }
+        #container {
+            background-color: #fe7bbf89;
+            border: 1px  rgba(0,0,0, 0.4);
+            width: 350px;
+            height: 320px;
+            margin-top: 250px;
+            padding: 10px;
+            border-radius: 5px 10px;
+            display:flexbox;
+            justify-items: center;
+            align-content: center;
+            
+        }
+
+
+        h2{
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color:#3f2b96;
+            font-size: xx-large;
+            text-shadow: 1px 1px 2px black, 0 0 25px #3f2b96c7, 0 0 5px #3f2b96;
+        }
+
+        button{
+            background-color: #298f93;
+            justify-content: center;
+            margin-left: 115px;
+        }
+        button:hover{
+            background-color: #005B61;
+        }
+    </style>
+</head>
+<bodu>
+    <div id="container">
+        <h2>
+            Bank Login
+        </h2>
+        <form method="post">
+            <label for=account_no id="account">Account No:
+            </label><br>
+            <input type="text" name="account_no" required><br><br>
+            <lable for="password" id="password">
+            Password:
+            </label><br>
+            <input type="password" name="password" required><br><br>
+            <button type="submit">
+                Login
+            </button>
+        </form>
+    </div>
+    </body>
+
+</html>

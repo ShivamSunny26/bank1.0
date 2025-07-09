@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Dashboard
+    </title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: linear-gradient(to right, #1e142c, #1e142c);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            margin: 2rem auto;
+            background-image: linear-gradient(to top, #49225b, #6e3482, #a56abd, #e7dbef, #f5ebfa);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        #container-header {
+            color: rgb(157, 43, 145);
+            padding: flex;
+            margin: 5px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 100px;
+            
+        }
+        #container-body h3{
+            text-align: center;
+            font-size: x-large;
+            color: #d9e0a4;
+        }
+        #container-body {
+            width: 600px;
+            height: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 8px;
+            background-image: linear-gradient(to top,#1a2d42, #2e4156, #aab7b7, #c0c8ca, #d4d8dd);
+        }
+
+        footer {
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .logout-btn{
+            padding: 8px 25px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .logout-btn:hover{
+            transform: scale(1.05);
+        }
+
+
+        .services {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            padding-top: 50px;
+        }
+
+        .sub {
+            width: 200px;
+            /*background-image: linear-gradient(to right, #0c969c, #0a7075);*/
+            box-shadow: 10px 10px 20px #aab7b7,
+                        -10px -10px 20px #2e4156;
+            border-radius: 20px 10px;
+            text-align: center;
+        }
+
+        .sub p {
+            color: #d9e0a4;
+            font-size: xx-large;
+            text-decoration: underline;
+            outline: none;
+        }
+
+        .sub p:focus, p:active {
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="container-header">
+            <div class="child">
+                <h2>
+                    Welcome, {{ user.username }}
+                </h2>
+
+                <p>
+                    Account No: {{ user.account_no }}
+                </p>
+            </div class="child" id="amount">
+            <div>
+                <p>
+                    Balance: {{ user.balance }}
+                </p>
+            </div>
+        </div>
+        <div id="container-body">
+            <h3 style="color: #1a2d42">
+                Services
+            </h3>
+            <hr>
+            <div class="services">
+                <div class="sub" id="transaction">
+                    <a href="transaction">
+                        <p>Transaction</p>
+                    </a>
+                </div>
+                <div class="sub" id="passbook">
+                    <a href="passbook">
+                        <p>Passbook</p>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <footer>
+            <form action="{{ url_for('login') }}">
+                <button class="logout-btn" type="submit">
+                    Logout
+                </button>
+            </form>
+        </footer>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Passbook
+        </title>
+    </head>
+    <body>
+        <h2>
+            Transaction History 
+        </h2>
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>Transaction ID</th>
+<th>Type</th>
+<th>From</th>
+<th>To</th>
+                <th>Amount</th>
+                <th>Timestamp</th>
+            </tr>
+            {% for txn in transactions %}
+            <tr>
+                <td>
+                    {{ txn.transaction_id }}
+                </td>
+                <td>
+                    {% if txn.from_account == user_acc %}
+                        Sent
+                    {% elif txn.to_account == user_acc %}
+                        Received
+                    {% else %}
+                        unknown
+                    {% endif %}
+                </td>
+                <td>
+                    {{ txn.from_account }}
+                </td>
+                <td>
+                    {{ txn.to_account }}
+                </td>
+                <td>
+                    {{ txn.amount }}
+                </td>
+                <td>
+                    {{ txn.timestamp }}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <a href="{{ url_for('dashboard') }}">
+            Back to Dashboard
+        </a>
+    </body>
+</html>
