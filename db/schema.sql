@@ -12,13 +12,18 @@ create table users (
 );
 
 create table transactions(
-    id int auto increment primary key,
+    id int auto_increment primary key,
     from_account varchar(20),
     to_account varchar(20),
     amount decimal(10, 2),
     timestamp timestamp default current_timestamp
 );
 
+alter table transactions
+add column transaction_id varchar(100) unique after id;
+
+alter table transactions
+add column status varchar(20) after amount;
 create table services (
     id int auto_increment primary key,
     account_no varchar(20), 
@@ -27,3 +32,6 @@ create table services (
     amount decimal(10,2),
     timestamp timestamp default current_timestamp
 );
+
+select * from users 
+limit 6;
