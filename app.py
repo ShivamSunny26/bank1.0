@@ -107,5 +107,58 @@ def passbook():
     conn.close()
     return render_template('passbook.html', transactions=transactions, user_acc=acc)
 
+@app.route('/register', method=['GET','POST'])
+def register():
+    if request.method == 'POST':
+        account_no = request.form['account_no']
+        name = request.form['name']
+        password = request.form['passsword']
+        balance = request.form.get('balance', 0)
+
+        conn= get_db()
+        cursor = conn.cursor()
+
+        #Check if account already exists
+        cursor.execute("SELECT * FROM users WHERE account_no=%s", (account_no,))
+        if cursor.fetchone():
+            cursor.close()
+            conn.close()
+            return "Account already exists!!"
+
+        # Insert new account
+        cursor.execute("INSERT INTO users (account_no, name, password, balance) VALUES (%s, %s, %s, %s)", (account_no, name, password, balance))
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return redirect('login2.html')
+    
+    return render_template('register.html')
+
+
+@app.route('/forgot-password', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method=='POST':
+        account_no = request.form['account_no']
+        new_password = request.form['new_password']
+
+        conn = get_db()
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT * FROM users WHERE account_np = %s", (account_no,))
+        if cursor.fetchone():
+            cursor.execute("UPDATE users SET password=%s WHERE account_no=%s", (new_password, account_no))
+            conn.commit()
+            cursor.close()
+            conn.close()
+            return "Password reset successful. You can now log in 😊"
+        else:
+            cursor.close()
+            conn.close()
+            return "Account not found"
+        
+    return render_template("forgot_password.html")
+
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
