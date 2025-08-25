@@ -28,7 +28,7 @@ def login():
         else:
             return "Invalid credentials"
 
-    return render_template('login2.html')
+    return render_template('login.html')
 
 @app.route('/dashboard')
 def dashboard():
@@ -107,10 +107,16 @@ def passbook():
     conn.close()
     return render_template('passbook.html', transactions=transactions, user_acc=acc)
 
-@app.route('/register', method=['GET','POST'])
+@app.route('/register', methods=['GET','POST'])
 def register():
     if request.method == 'POST':
         account_no = request.form['account_no']
+
+        # Validation
+        if len(account_no) != 10 or not account_no.isdigit():
+            return "Account number must be exactly 10 digits."
+        
+
         name = request.form['name']
         password = request.form['passsword']
         balance = request.form.get('balance', 0)
@@ -130,7 +136,7 @@ def register():
         conn.commit()
         cursor.close()
         conn.close()
-        return redirect('login2.html')
+        return redirect('login.html')
     
     return render_template('register.html')
 

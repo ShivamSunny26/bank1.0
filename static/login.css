@@ -110,7 +110,8 @@ body {
 
 
         .login button:hover p {
-            translate: -10px 0;
+            /* translate: -10px 0; */
+            font-size: 0.95rem;
         }
 
         .login button:hover span {
